@@ -68,7 +68,7 @@
         }
         #message{
             font-family: 'Courier New', Courier, monospace;
-            font-size: 2em;
+            font-size: 2rem;
             width: 100%;
             text-align: center;
             line-height: 2;
@@ -105,7 +105,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-family: 'Courier New', Courier, monospace;
-            font-size: 3em;
+            font-size: 3rem;
             text-shadow: 2px 2px 4px #000000;
             width: 100%;
             display: flex;
@@ -113,7 +113,6 @@
             align-items: center;
         }
         #showButton{
-            margin: 0 auto;
             width: fit-content;
             font-size: 2em;
             background-color: red;
@@ -134,21 +133,23 @@
 
         <img src="hearts.svg" alt="hearts">
         <div id="text">
-            <h1>Lubim Ta</h1>
+            <h1>Ľúbim ťa</h1>
         </div>
         <div id="message">
-            Krasný Valentin BaByBu!<br>
+            <span style="font-weight: bold; font-size: 1.2em;">Krasný Valentin BaByBu.</span><br><br>
+            <span style="text-decoration: underline; font-style: italic;">Budeš moja valentínka ?!!</span><br><br>
             Som rád, že sme spolu a neviem, čo by som si bez teba počal.<br>
-            Keď nie sme spolu, tak to nie som to ja.<br>
-            Si môj Snickers.<br>
+            Keď nie sme spolu, tak to nie som to ja.<br><br>
+            <span style="font-style: italic;">Si môj Snickers.</span><br><br>
             Dúfam, že ťa budem môcť robiť šťastnou ešte dlllllllllllho.<br>
-            Si moja slnecnica.<br>
-            Ľúbim ťa.
+            <span style="font-weight: bold; color: #8ec018;">Si moja Slnečnica.</span><br>
+            <span style="font-weight: 900; color: red; font-size: 1.5em;">Ľúbim ťa.</span><br>
         </div>
+        
     </div>
     
     <div id="starter">
-        <button id="showButton">Klikni ma</button>
+        <button id="showButton">Klikni ma!!</button>
         <div id="progress">
             <div id="progress-bar">
                 <div id="progress-fill"></div>
@@ -163,20 +164,42 @@
         const showButton = document.getElementById("showButton");
         const starter = document.getElementById("starter");
 
-        
+        const viewportWidth = screen.width / 2;
+        const viewportHeight = screen.height / 2;
         function handleButtonClick() {
             clickCount++;
-
+            const buttonWidth = 200;
+            const buttonHeight = 150;
+            console.log("Button",buttonWidth, buttonHeight);
+            
             const progressPercentage = (clickCount / 8) * 100;
             progressFill.style.width = progressPercentage + "%";
-
+            showButton.style.position = "absolute";
+            
+            var X = (viewportWidth - (buttonWidth)) * Math.random(); 
+            var Y = (viewportHeight - (buttonHeight)) * Math.random();
+            console.log(X, Y, viewportHeight, viewportWidth);
+            showButton.style.fontSize = "1em";
+            
+            if (Math.random() > 0.5){
+                showButton.style.transform = `translate(${X}px, ${Y}px)`;
+            }
+            else{
+                showButton.style.transform = `translate(${-X}px, ${-Y}px)`;
+            }
             if (clickCount === 8) {
                 content.style.display = "block";
                 showButton.style.display = "none";
                 starter.style.display = "none";
             }
-            else if (clickCount > 0) {
-                showButton.textContent = "Este";
+            if (clickCount == 1) {
+                showButton.textContent = "Ešte!!!";
+            }
+            if (clickCount == 3){
+                showButton.textContent = "A ešte!!!";
+            }
+            if (clickCount == 5){
+                showButton.textContent = "Už to budee!!!";
             }
         }
 
